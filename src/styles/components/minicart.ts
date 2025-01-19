@@ -25,3 +25,14 @@ export const CloseButton = styled('button', {
   right: 24,
   color: '$gray300',
 })
+
+export const EmptyCart = styled('div', {
+  display: 'flex',
+  height: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  p: {
+    fontSize: '$lg'
+  }
+})

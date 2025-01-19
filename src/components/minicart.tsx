@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { CloseButton, MinicartContainer } from "../styles/components/minicart";
+import { CloseButton, EmptyCart, MinicartContainer } from "../styles/components/minicart";
 
 interface MinicartProps {
   isActive: boolean
@@ -13,7 +13,9 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
         <X size={20} />
       </CloseButton>
 
-      <p>Seu carrinho está vazio!</p>
+      <EmptyCart>
+        <p>Seu carrinho está vazio!</p>
+      </EmptyCart>
     </MinicartContainer>
   )
 }
