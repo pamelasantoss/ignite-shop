@@ -28,6 +28,7 @@ export const CartButton = styled('button', {
   border: 'none',
   borderRadius: 6,
   cursor: 'pointer',
+  position: 'relative',
   
   svg: {
     fill: '$gray300',
@@ -38,5 +39,24 @@ export const CartButton = styled('button', {
     svg: {
       opacity: 1
     }
+  },
+
+  span: {
+    background: '$green500',
+    width: 28,
+    height: 28,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '50%',
+    border: '3px solid $gray900',
+    color: '$white',
+    fontWeight: 'bold',
+    fontSize: '$sm',
+
+    position: 'absolute',
+    top: '-10px',
+    right: '-10px',
+    zIndex: 10
   }
 })

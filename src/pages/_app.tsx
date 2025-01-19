@@ -14,6 +14,8 @@ globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
   const [showMinicart, setShowMinicart] = useState(false)
 
+  const cartCounter = 0
+
   function handleOpenMinicart() {
     setShowMinicart(true)
   }
@@ -30,6 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
         </Link>
 
         <CartButton type="button" onClick={handleOpenMinicart}>
+          {cartCounter > 0 && (
+            <span>1</span>
+          )}
           <ShoppingBag size={20} />
         </CartButton>
       </Header>
