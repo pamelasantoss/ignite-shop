@@ -6,6 +6,10 @@ const nextConfig = {
     remotePatterns: [
       {
         hostname: 'files.stripe.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co'
       }
     ]
   }
