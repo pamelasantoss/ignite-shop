@@ -28,7 +28,8 @@ export default function Product({ product }: ProductProps) {
   }
 
   async function handleBuyProduct() {
-    try {
+    console.log('Adiciona produto no minicart!')
+    /*try {
       setIsCreatingCheckoutSession(true)
 
       const response = await axios.post('/api/checkout', {
@@ -43,7 +44,7 @@ export default function Product({ product }: ProductProps) {
 
       setIsCreatingCheckoutSession(false)
       alert('Falha ao redirecionar ao checkout! ')
-    }
+    }*/
   }
 
   return (
@@ -64,7 +65,7 @@ export default function Product({ product }: ProductProps) {
           <p>{product.description}</p>
 
           <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
-            Comprar agora
+            Colocar na sacola
           </button>
         </ProductDetails>
       </ProductContainer>
