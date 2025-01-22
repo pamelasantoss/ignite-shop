@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
           {cartCounter > 0 && (
             <span>1</span>
           )}
-          <ShoppingBag size={20} />
+          <ShoppingBag size={24} />
         </CartButton>
       </Header>
 
