@@ -1,22 +1,17 @@
 import Image from "next/image"
 import { useKeenSlider } from "keen-slider/react"
-import { HomeContainer, Product } from "../styles/pages/home"
+import { HomeContainer } from "../styles/pages/home"
 
 import 'keen-slider/keen-slider.min.css';
 import { stripe } from "../lib/stripe"
 import { GetStaticProps } from "next"
 import Stripe from "stripe"
-import Link from "next/link";
 import Head from "next/head";
-import { ShoppingBag } from "lucide-react";
+import ProductCard, { ProductType } from "../components/product-card";
+import ProductCardSkeleton from "../components/product-card-skeleton";
 
 interface HomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-  }[]
+  products: ProductType[]
 }
 
 export default function Home({ products }: HomeProps) {
@@ -42,24 +37,22 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => (
-          <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
-            <Product className="keen-slider__slide">
-              <Image src={product.imageUrl} width={520} height={480} alt="" />
-
-              <footer>
-                <section>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
-                </section>
-
-                <button type="button">
-                  <ShoppingBag size={32} />
-                </button>
-              </footer>
-            </Product>
-          </Link>
-        ))}
+        {products.length > 0 ? (
+          products.map(product => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              imageUrl={product.imageUrl}
+              price={product.price}
+            />
+          ))
+        ) : (
+          <>
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+          </>
+        )}
       </HomeContainer>
     </>
   )
@@ -73,14 +66,16 @@ export const getStaticProps: GetStaticProps = async () => {
   const products = response.data.map(product => {
     const price = product.default_price as Stripe.Price
 
-    return {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(price.unit_amount / 100)
+    if (price.unit_amount) {
+      return {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(price.unit_amount / 100)
+      }
     }
   })
 
