@@ -3,21 +3,29 @@ import { styled } from "..";
 export const MinicartContainer = styled('div', {
   background: '$gray800',
   position: 'fixed',
-  right: '-30%',
+  right: 0,
   top: 0,
-  width: '25%',
+  width: '90%',
   height: '100%',
   zIndex: 10,
   boxShadow: '0 0 25px black',
   padding: '1.5rem',
-  transition: '.6s',
+
+  transform: 'translateX(100%)',
+  opacity: 0,
+  transition: 'all 0.5s ease-in-out',
 
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
 
   '&.active': {
-    right: 0,
+    transform: 'translateX(0%)',
+    opacity: 1
+  },
+
+  '@lg': {
+    width: '25%',
   }
 })
 

@@ -21,5 +21,9 @@ export const { config, styled, css, globalCss, keyframes, getCssText, theme, cre
       xl: '1.5rem',
       '2xl': '2rem'
     }
+  },
+  media: {
+    lg: '(min-width: 768px)',
+    sm: '(max-width: 768px)'
   }
 })

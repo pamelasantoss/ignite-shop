@@ -6,7 +6,11 @@ export const HomeContainer = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px)) / 2)',
   marginLeft: 'auto',
-  minHeight: 656
+  minHeight: '100%',
+
+  '@lg': {
+    minHeight: '80vh'
+  }
 })
 
 export const Product = styled('div', {
@@ -46,18 +50,34 @@ export const Product = styled('div', {
     section: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '0.5rem'
+      gap: '0.5rem',
+      width: '100%'
     },
 
     strong: {
-      fontSize: '$lg',
-      color: '$gray100'
+      fontSize: '$md',
+      color: '$gray100',
+
+      '@lg': {
+        fontSize: '$lg',
+      },
+
+      '@sm': {
+        maxWidth: '90%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }
     },
 
     span: {
-      fontSize: '$xl',
+      fontSize: '$lg',
       fontWeight: 'bold',
-      color: '$green300'
+      color: '$green300',
+
+      '@lg': {
+        fontSize: '$xl',
+      }
     },
 
     button: {
@@ -66,6 +86,7 @@ export const Product = styled('div', {
       border: 0,
       color: '$white',
       borderRadius: 6,
+      minWidth: 56,
       width: 56,
       height: 56,
       display: 'flex',
