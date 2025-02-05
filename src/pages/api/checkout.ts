@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "../../lib/stripe";
+import { validateCartItems } from 'use-shopping-cart/utilities'
+import Stripe from "stripe";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { priceId } = req.body
@@ -15,6 +17,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       error: 'Price not found.'
     })
   }
+
+  // TESTE
+  const response = await stripe.products.list({
+    expand: ['data.default_price']
+  })
+
+  const products = response.data.map(product => {
+    const price = product.default_price as Stripe.Price
+
+    if (price.unit_amount) {
+      return {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(price.unit_amount / 100)
+      }
+    }
+  })
+  // FIM TESTE
+  console.log("products: ", products)
+  // const line_items = validateCartItems(products, priceId)
 
   const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`
   const cancelUrl = `${process.env.NEXT_URL}/`

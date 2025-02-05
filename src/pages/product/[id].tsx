@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useState } from "react";
 import Head from "next/head";
+import { useShoppingCart } from "use-shopping-cart";
 
 interface ProductProps {
   product: {
@@ -22,9 +23,16 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+  const { addItem, cartDetails } = useShoppingCart()
+
+  console.log("cartDetails: ", cartDetails)
 
   if (isFallback) {
     return <p>Loading...</p>
+  }
+
+  function handleAddToCart() {
+    addItem(product, { count: 1 })
   }
 
   async function handleBuyProduct() {
@@ -64,7 +72,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
+          <button disabled={isCreatingCheckoutSession} onClick={handleAddToCart}>
             Colocar na sacola
           </button>
         </ProductDetails>
