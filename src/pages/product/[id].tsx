@@ -20,7 +20,8 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
-  const { addItem, cartDetails } = useShoppingCart()
+  const { addItem, cartDetails, cartCount } = useShoppingCart()
+  console.log(cartCount)
 
   if (isFallback) {
     return <p>Loading...</p>
