@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
 import Minicart from '../components/minicart';
 import { useState } from 'react';
-import { CartProvider } from 'use-shopping-cart';
+import { CartProvider, useShoppingCart } from 'use-shopping-cart';
 
 globalStyles();
 
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
         stripe={stripeKey}
         currency="BRL"
         loading={<p>Muita calma nessa hora...</p>}
-        shouldPersist={false}
+        shouldPersist={true}
       >
         <Header>
           <Link href="/" prefetch={false}>

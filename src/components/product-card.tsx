@@ -7,10 +7,15 @@ export interface ProductType {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
 }
 
 export default function ProductCard({ id, name, imageUrl, price }: ProductType) {
+  const formatPrice = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price / 100)
+
   return (
     <Link href={`/product/${id}`} prefetch={false}>
       <Product className="keen-slider__slide">
@@ -19,7 +24,7 @@ export default function ProductCard({ id, name, imageUrl, price }: ProductType) 
         <footer>
           <section>
             <strong>{name}</strong>
-            <span>{price}</span>
+            <span>{formatPrice}</span>
           </section>
 
           <button type="button">
