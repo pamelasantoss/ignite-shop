@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useShoppingCart } from "use-shopping-cart";
+import { formatPrice } from "../../utils/formatPrice";
 
 interface ProductProps {
   product: {
@@ -20,8 +21,7 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
-  const { addItem, cartDetails, cartCount } = useShoppingCart()
-  console.log(cartCount)
+  const { addItem } = useShoppingCart()
 
   if (isFallback) {
     return <p>Loading...</p>
@@ -37,12 +37,9 @@ export default function Product({ product }: ProductProps) {
     }
 
     addItem(productToAdd)
-
-    console.log("productToAdd: ", productToAdd)
-    console.log("cartDetails: ", cartDetails)
   }
 
-  console.log(product)
+  console.log("Informações do produto: ", product)
 
   return (
     <>
@@ -57,7 +54,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{formatPrice(product.price)}</span>
 
           <p>{product.description}</p>
 

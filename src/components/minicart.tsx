@@ -5,6 +5,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import { useMemo, useState } from "react";
 import axios from "axios";
 import { CartDetails } from "use-shopping-cart/core";
+import { formatPrice } from "../utils/formatPrice";
 
 interface MinicartProps {
   isActive: boolean
@@ -14,6 +15,7 @@ interface MinicartProps {
 export default function Minicart({ isActive, onClose }: MinicartProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
   const cartDetails: CartDetails | undefined = useShoppingCart().cartDetails;
+  const { cartCount, totalPrice } = useShoppingCart()
 
   const products = useMemo(() => {
     const getProducts = Object.values(cartDetails ?? {})
@@ -23,7 +25,7 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
     return []
   }, [cartDetails])
 
-  console.log("products: ", products)
+  console.log("products minicart: ", products)
 
   async function handleCheckout() {
     const items = products.map(item => ({
@@ -75,11 +77,15 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
             <ul>
               <li>
                 <p>Quantidade</p>
-                <p>3 itens</p>
+                {cartCount && cartCount > 1 ? (
+                  <p>{cartCount} itens</p>
+                ) : (
+                  <p>{cartCount} item</p>
+                )}
               </li>
               <li>
                 <p>Valor</p>
-                <p><strong>R$ 270,00</strong></p>
+                <p><strong>{formatPrice(totalPrice)}</strong></p>
               </li>
             </ul>
             
