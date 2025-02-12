@@ -15,7 +15,7 @@ interface MinicartProps {
 export default function Minicart({ isActive, onClose }: MinicartProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
   const cartDetails: CartDetails | undefined = useShoppingCart().cartDetails;
-  const { cartCount, totalPrice } = useShoppingCart()
+  const { cartCount, totalPrice, removeItem } = useShoppingCart()
 
   const products = useMemo(() => {
     const getProducts = Object.values(cartDetails ?? {})
@@ -24,8 +24,6 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
     }
     return []
   }, [cartDetails])
-
-  console.log("products minicart: ", products)
 
   async function handleCheckout() {
     const items = products.map(item => ({
@@ -62,12 +60,12 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
             <ul>
               {products.map((product) => (
                 <ProductList key={product.id}>
-                  <Image src="https://placehold.co/400x400" width={100} height={100} alt="" />
+                  <Image src={product.imageUrl} width={100} height={100} alt="" />
 
                   <div>
                     <p>{product.name}</p>
                     <p><strong>{product.formattedPrice}</strong></p>
-                    <button type="button">Remover</button>
+                    <button type="button" onClick={() => removeItem(product.id)}>Remover</button>
                   </div>
                 </ProductList>
               ))}

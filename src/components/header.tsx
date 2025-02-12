@@ -20,9 +20,9 @@ export default function Header({ onOpenMinicart }: HeaderProps) {
       </Link>
 
       <CartButton type="button" onClick={onOpenMinicart}>
-        {cartCount && (
+        {cartCount && cartCount > 0 ? (
           <span>{cartCount}</span>
-        )}
+        ) : null}
         <ShoppingBag size={24} />
       </CartButton>
     </HeaderContainer>

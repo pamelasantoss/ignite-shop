@@ -33,13 +33,12 @@ export default function Product({ product }: ProductProps) {
       name: product.name,
       price: product.price,
       currency: 'BRL',
-      quantity: 1
+      quantity: 1,
+      imageUrl: product.imageUrl
     }
 
     addItem(productToAdd)
   }
-
-  console.log("Informações do produto: ", product)
 
   return (
     <>
