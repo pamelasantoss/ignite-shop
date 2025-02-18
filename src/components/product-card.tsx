@@ -2,12 +2,13 @@ import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { Product } from "../styles/components/product-card";
 import Image from "next/image";
+import { formatPrice } from "../utils/formatPrice";
 
 export interface ProductType {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
 }
 
 export default function ProductCard({ id, name, imageUrl, price }: ProductType) {
@@ -19,7 +20,7 @@ export default function ProductCard({ id, name, imageUrl, price }: ProductType) 
         <footer>
           <section>
             <strong>{name}</strong>
-            <span>{price}</span>
+            <span>{formatPrice(price)}</span>
           </section>
 
           <button type="button">
