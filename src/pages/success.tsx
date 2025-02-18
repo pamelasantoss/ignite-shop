@@ -5,7 +5,7 @@ import { stripe } from "../lib/stripe";
 import Stripe from "stripe"
 import Image from "next/image";
 import Head from "next/head";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useShoppingCart } from "use-shopping-cart";
 
 interface SuccessProps {
@@ -33,7 +33,7 @@ export default function Success({ customerName, products }: SuccessProps) {
       <SuccessContainer>
         <ImageListContainer>
           {products.map((product, index) => (
-            <ImageContainer key={product.name} style={{ '--left': `${index * -15}px` }}>
+            <ImageContainer key={product.name} style={{ '--left': `${index * -15}px` } as React.CSSProperties}>
               <Image src={product.imageUrl} width={140} height={140} alt="" />
             </ImageContainer>
           ))}
@@ -71,10 +71,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const customerName = session.customer_details?.name
   const products = session.line_items?.data.map((item) => {
-    const product = item.price.product as Stripe.Product
-    return {
-      name: product.name,
-      imageUrl: product.images[0]
+    if (item.price) {
+      const product = item.price.product as Stripe.Product
+      return {
+        name: product.name,
+        imageUrl: product.images[0]
+      }
     }
   })
 
