@@ -1,17 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+import { ShoppingBag } from "lucide-react";
 import { HeaderContainer, CartButton } from "../styles/components/header";
-import { useShoppingCart } from 'use-shopping-cart';
+import { useShoppingCart } from "use-shopping-cart";
 
-import logoImg from '../assets/logo.svg'
+import logoImg from "../assets/logo.svg";
 
 interface HeaderProps {
-  onOpenMinicart: () => void
+  onOpenMinicart: () => void;
 }
 
 export default function Header({ onOpenMinicart }: HeaderProps) {
-  const { cartCount } = useShoppingCart()
+  const { cartCount } = useShoppingCart();
 
   return (
     <HeaderContainer>
@@ -20,11 +20,9 @@ export default function Header({ onOpenMinicart }: HeaderProps) {
       </Link>
 
       <CartButton type="button" onClick={onOpenMinicart}>
-        {cartCount && cartCount > 0 ? (
-          <span>{cartCount}</span>
-        ) : null}
+        {cartCount && cartCount > 0 ? <span>{cartCount}</span> : null}
         <ShoppingBag size={24} />
       </CartButton>
     </HeaderContainer>
-  )
+  );
 }

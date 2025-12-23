@@ -1,54 +1,54 @@
 import { styled } from "..";
 
-export const HeaderContainer = styled('header', {
-  padding: '2rem 0',
-  width: '100%',
+export const HeaderContainer = styled("header", {
+  padding: "2rem 0",
+  width: "100%",
   maxWidth: 1180,
-  margin: '0 auto',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-})
+  margin: "0 auto",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
 
-export const CartButton = styled('button', {
-  background: '$gray800',
+export const CartButton = styled("button", {
+  background: "$gray800",
   width: 48,
   height: 48,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: 'none',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: "none",
   borderRadius: 6,
-  cursor: 'pointer',
-  position: 'relative',
-  
+  cursor: "pointer",
+  position: "relative",
+
   svg: {
-    fill: '$gray300',
-    opacity: 0.5
+    color: "$gray300",
+    opacity: 0.5,
   },
 
-  '&:hover': {
+  "&:hover": {
     svg: {
-      opacity: 1
-    }
+      opacity: 1,
+    },
   },
 
   span: {
-    background: '$green500',
+    background: "$green500",
     width: 28,
     height: 28,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '50%',
-    border: '3px solid $gray900',
-    color: '$white',
-    fontWeight: 'bold',
-    fontSize: '$sm',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    border: "3px solid $gray900",
+    color: "$white",
+    fontWeight: "bold",
+    fontSize: "$sm",
 
-    position: 'absolute',
-    top: '-10px',
-    right: '-10px',
-    zIndex: 10
-  }
-})
+    position: "absolute",
+    top: "-10px",
+    right: "-10px",
+    zIndex: 10,
+  },
+});

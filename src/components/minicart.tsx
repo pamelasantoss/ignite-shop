@@ -1,5 +1,12 @@
 import { X } from "lucide-react";
-import { CloseButton, EmptyCart, MinicartContainer, MinicartContent, MinicartSummary, ProductList } from "../styles/components/minicart";
+import {
+  CloseButton,
+  EmptyCart,
+  MinicartContainer,
+  MinicartContent,
+  MinicartSummary,
+  ProductList,
+} from "../styles/components/minicart";
 import Image from "next/image";
 import { useShoppingCart } from "use-shopping-cart";
 import { useMemo, useState } from "react";
@@ -8,41 +15,42 @@ import { CartDetails } from "use-shopping-cart/core";
 import { formatPrice } from "../utils/formatPrice";
 
 interface MinicartProps {
-  isActive: boolean
-  onClose: () => void
+  isActive: boolean;
+  onClose: () => void;
 }
 
 export default function Minicart({ isActive, onClose }: MinicartProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false);
   const cartDetails: CartDetails | undefined = useShoppingCart().cartDetails;
-  const { cartCount, totalPrice, removeItem } = useShoppingCart()
+  const { cartCount, totalPrice, removeItem } = useShoppingCart();
 
   const products = useMemo(() => {
-    const getProducts = Object.values(cartDetails ?? {})
+    const getProducts = Object.values(cartDetails ?? {});
     if (getProducts) {
-      return getProducts
+      return getProducts;
     }
-    return []
-  }, [cartDetails])
+    return [];
+  }, [cartDetails]);
 
   async function handleCheckout() {
-    const items = products.map(item => ({
+    const items = products.map((item) => ({
       priceId: item.id,
       quantity: item.quantity,
     }));
 
     try {
-      setIsCreatingCheckoutSession(true)
+      setIsCreatingCheckoutSession(true);
 
-      const response = await axios.post('/api/checkout', { items })
+      const response = await axios.post("/api/checkout", { items });
 
-      const { checkoutUrl } = response.data
+      const { checkoutUrl } = response.data;
 
-      window.location.href = checkoutUrl
+      window.location.href = checkoutUrl;
     } catch (err) {
-      setIsCreatingCheckoutSession(false)
-      alert('Falha ao redirecionar ao checkout!')
-      console.error('Erro ao processar o checkout', err);
+      setIsCreatingCheckoutSession(false);
+      alert("Falha ao redirecionar ao checkout!");
+      console.error("Erro ao processar o checkout", err);
     }
   }
 
@@ -60,12 +68,24 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
             <ul>
               {products.map((product) => (
                 <ProductList key={product.id}>
-                  <Image src={product.imageUrl} width={100} height={100} alt="" />
+                  <Image
+                    src={product.imageUrl}
+                    width={100}
+                    height={100}
+                    alt=""
+                  />
 
                   <div>
                     <p>{product.name}</p>
-                    <p><strong>{product.formattedPrice}</strong></p>
-                    <button type="button" onClick={() => removeItem(product.id)}>Remover</button>
+                    <p>
+                      <strong>{product.formattedPrice}</strong>
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => removeItem(product.id)}
+                    >
+                      Remover
+                    </button>
                   </div>
                 </ProductList>
               ))}
@@ -83,11 +103,19 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
               </li>
               <li>
                 <p>Valor</p>
-                <p><strong>{formatPrice(totalPrice)}</strong></p>
+                <p>
+                  <strong>{formatPrice(totalPrice)}</strong>
+                </p>
               </li>
             </ul>
-            
-            <button type="button" disabled={isCreatingCheckoutSession} onClick={handleCheckout}>Finalizar compra</button>
+
+            <button
+              type="button"
+              disabled={isCreatingCheckoutSession}
+              onClick={handleCheckout}
+            >
+              Finalizar compra
+            </button>
           </MinicartSummary>
         </>
       ) : (
@@ -96,5 +124,5 @@ export default function Minicart({ isActive, onClose }: MinicartProps) {
         </EmptyCart>
       )}
     </MinicartContainer>
-  )
+  );
 }

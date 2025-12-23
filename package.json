@@ -10,21 +10,24 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
-    "axios": "^1.7.9",
+    "axios": "^1.13.2",
     "keen-slider": "^6.8.6",
-    "lucide-react": "^0.473.0",
-    "next": "15.0.4",
+    "lucide-react": "^0.562.0",
+    "next": "^16.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "stripe": "^17.4.0",
+    "stripe": "^17.7.0",
     "use-shopping-cart": "^3.2.0"
   },
   "devDependencies": {
-    "@types/node": "22.10.1",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "eslint": "9.16.0",
-    "eslint-config-next": "15.0.4",
-    "typescript": "5.7.2"
+    "@types/node": "^25.0.3",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.1",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "react-dom": "^18.3.1"
   }
 }
